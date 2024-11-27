@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>message</title>
+</head>
+<body>
+    <h1>salam</h1>
+    <script>
+        let url = `ws://192.168.1.141:8000/ws/message/1/`;
+        const socket = new WebSocket(url);
+            
+        socket.onopen = function(event) {
+            console.log(`WebSocket is open now.`);
+        };
+        
+        socket.onmessage = function(event) {
+            let data = JSON.parse(event.data)
+            console.log('WebSocket message received:', data.message);
+        };
+        
+        socket.onclose = function(event) {
+            console.log('WebSocket is closed now.');
+        };
+        
+        socket.onerror = function(error) {
+            console.error('WebSocket error observed:', error);
+        };
+        
+    </script>
+</body>
+</html>
