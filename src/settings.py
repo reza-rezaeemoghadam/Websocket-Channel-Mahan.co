@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j3jk9tuu@cro(=x=x#fkj)wn9^@nn9fr*3k1y7fgzg*vh$2_k8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.141','http://192.168.1.143:3000']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.141','http://192.168.1.143:3000']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware', # Add this middleware
     'django.middleware.common.CommonMiddleware',
@@ -154,7 +155,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -170,3 +171,5 @@ SWAGGER_SETTINGS = {
                                                 'apiKey': { 'type': 'apiKey', 'name': 'Authorization', 'in': 'header' },
                                         },
 }
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
